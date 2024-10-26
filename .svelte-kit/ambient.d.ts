@@ -5,7 +5,7 @@
 /// <reference types="@sveltejs/kit" />
 
 /**
- * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
+ * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://kit.svelte.dev/docs/configuration#env) (if configured).
  * 
  * _Unlike_ [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), the values exported from this module are statically injected into your bundle at build time, enabling optimisations like dead code elimination.
  * 
@@ -31,6 +31,7 @@ declare module '$env/static/private' {
 	export const ADSK_3DSMAX_x64_2020: string;
 	export const ADSK_3DSMAX_x64_2021: string;
 	export const ADSK_3DSMAX_x64_2022: string;
+	export const ADSK_3DSMAX_x64_2025: string;
 	export const ALLUSERSPROFILE: string;
 	export const ANDROID_HOME: string;
 	export const ANDROID_NDK_ROOT: string;
@@ -49,6 +50,8 @@ declare module '$env/static/private' {
 	export const CUDA_CACHE_MAXSIZE: string;
 	export const DriverData: string;
 	export const EDITOR: string;
+	export const EFC_10588: string;
+	export const flutter: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GIT_ASKPASS: string;
@@ -70,8 +73,6 @@ declare module '$env/static/private' {
 	export const NDKROOT: string;
 	export const NDK_ROOT: string;
 	export const NODE: string;
-	export const NODE_EXE: string;
-	export const NPM_CLI_JS: string;
 	export const npm_command: string;
 	export const npm_config_cache: string;
 	export const npm_config_engine_strict: string;
@@ -79,10 +80,11 @@ declare module '$env/static/private' {
 	export const npm_config_global_prefix: string;
 	export const npm_config_init_module: string;
 	export const npm_config_local_prefix: string;
-	export const npm_config_metrics_registry: string;
 	export const npm_config_node_gyp: string;
 	export const npm_config_noproxy: string;
+	export const npm_config_npm_version: string;
 	export const npm_config_prefix: string;
+	export const npm_config_registry: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_user_agent: string;
 	export const npm_execpath: string;
@@ -99,19 +101,21 @@ declare module '$env/static/private' {
 	export const npm_package_peer: string;
 	export const npm_package_resolved: string;
 	export const npm_package_version: string;
-	export const NPM_PREFIX_NPM_CLI_JS: string;
 	export const NUMBER_OF_PROCESSORS: string;
+	export const NVM_HOME: string;
+	export const NVM_SYMLINK: string;
 	export const NVPACK_NDK_TOOL_VERSION: string;
 	export const NVPACK_NDK_VERSION: string;
 	export const NVPACK_ROOT: string;
-	export const OculusBase: string;
-	export const OMP_NUM_THREADS: string;
 	export const OneDrive: string;
 	export const OneDriveConsumer: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
+	export const POSH_INSTALLER: string;
+	export const POSH_THEMES_PATH: string;
+	export const POWERSHELL_DISTRIBUTION_CHANNEL: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
@@ -136,26 +140,22 @@ declare module '$env/static/private' {
 	export const USERNAME: string;
 	export const USERPROFILE: string;
 	export const VBOX_MSI_INSTALL_PATH: string;
-	export const VRAY5_FOR_3DSMAX2021_MAIN: string;
-	export const VRAY5_FOR_3DSMAX2021_PLUGINS: string;
-	export const VRAY5_FOR_3DSMAX2022_MAIN: string;
-	export const VRAY5_FOR_3DSMAX2022_PLUGINS: string;
-	export const VRAY_FOR_MAYA2022_MAIN: string;
-	export const VRAY_FOR_MAYA2022_PLUGINS: string;
-	export const VRAY_MDL_PATH_3DSMAX2021: string;
+	export const VRAY_FOR_3DSMAX2022_MAIN: string;
+	export const VRAY_FOR_3DSMAX2022_PLUGINS: string;
+	export const VRAY_FOR_3DSMAX2025_MAIN: string;
+	export const VRAY_FOR_3DSMAX2025_PLUGINS: string;
 	export const VRAY_MDL_PATH_3DSMAX2022: string;
+	export const VRAY_MDL_PATH_3DSMAX2025: string;
 	export const VRAY_MTLIB_DOWNLOAD_DIR: string;
-	export const VRAY_OSL_PATH_3DSMAX2021: string;
 	export const VRAY_OSL_PATH_3DSMAX2022: string;
-	export const VRAY_OSL_PATH_MAYA2022: string;
 	export const VRAY_SEND_FEEDBACK: string;
-	export const VRAY_TOOLS_MAYA2022: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const VSCODE_INJECTION: string;
 	export const windir: string;
+	export const _VOLTA_TOOL_RECURSION: string;
 }
 
 /**
@@ -168,11 +168,11 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-
+	
 }
 
 /**
- * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) (or running [`vite preview`](https://kit.svelte.dev/docs/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
+ * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) (or running [`vite preview`](https://kit.svelte.dev/docs/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://kit.svelte.dev/docs/configuration#env) (if configured).
  * 
  * This module cannot be imported into client-side code.
  * 
@@ -190,6 +190,7 @@ declare module '$env/dynamic/private' {
 		ADSK_3DSMAX_x64_2020: string;
 		ADSK_3DSMAX_x64_2021: string;
 		ADSK_3DSMAX_x64_2022: string;
+		ADSK_3DSMAX_x64_2025: string;
 		ALLUSERSPROFILE: string;
 		ANDROID_HOME: string;
 		ANDROID_NDK_ROOT: string;
@@ -208,6 +209,8 @@ declare module '$env/dynamic/private' {
 		CUDA_CACHE_MAXSIZE: string;
 		DriverData: string;
 		EDITOR: string;
+		EFC_10588: string;
+		flutter: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;
@@ -229,8 +232,6 @@ declare module '$env/dynamic/private' {
 		NDKROOT: string;
 		NDK_ROOT: string;
 		NODE: string;
-		NODE_EXE: string;
-		NPM_CLI_JS: string;
 		npm_command: string;
 		npm_config_cache: string;
 		npm_config_engine_strict: string;
@@ -238,10 +239,11 @@ declare module '$env/dynamic/private' {
 		npm_config_global_prefix: string;
 		npm_config_init_module: string;
 		npm_config_local_prefix: string;
-		npm_config_metrics_registry: string;
 		npm_config_node_gyp: string;
 		npm_config_noproxy: string;
+		npm_config_npm_version: string;
 		npm_config_prefix: string;
+		npm_config_registry: string;
 		npm_config_userconfig: string;
 		npm_config_user_agent: string;
 		npm_execpath: string;
@@ -258,19 +260,21 @@ declare module '$env/dynamic/private' {
 		npm_package_peer: string;
 		npm_package_resolved: string;
 		npm_package_version: string;
-		NPM_PREFIX_NPM_CLI_JS: string;
 		NUMBER_OF_PROCESSORS: string;
+		NVM_HOME: string;
+		NVM_SYMLINK: string;
 		NVPACK_NDK_TOOL_VERSION: string;
 		NVPACK_NDK_VERSION: string;
 		NVPACK_ROOT: string;
-		OculusBase: string;
-		OMP_NUM_THREADS: string;
 		OneDrive: string;
 		OneDriveConsumer: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		Path: string;
 		PATHEXT: string;
+		POSH_INSTALLER: string;
+		POSH_THEMES_PATH: string;
+		POWERSHELL_DISTRIBUTION_CHANNEL: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;
@@ -295,28 +299,24 @@ declare module '$env/dynamic/private' {
 		USERNAME: string;
 		USERPROFILE: string;
 		VBOX_MSI_INSTALL_PATH: string;
-		VRAY5_FOR_3DSMAX2021_MAIN: string;
-		VRAY5_FOR_3DSMAX2021_PLUGINS: string;
-		VRAY5_FOR_3DSMAX2022_MAIN: string;
-		VRAY5_FOR_3DSMAX2022_PLUGINS: string;
-		VRAY_FOR_MAYA2022_MAIN: string;
-		VRAY_FOR_MAYA2022_PLUGINS: string;
-		VRAY_MDL_PATH_3DSMAX2021: string;
+		VRAY_FOR_3DSMAX2022_MAIN: string;
+		VRAY_FOR_3DSMAX2022_PLUGINS: string;
+		VRAY_FOR_3DSMAX2025_MAIN: string;
+		VRAY_FOR_3DSMAX2025_PLUGINS: string;
 		VRAY_MDL_PATH_3DSMAX2022: string;
+		VRAY_MDL_PATH_3DSMAX2025: string;
 		VRAY_MTLIB_DOWNLOAD_DIR: string;
-		VRAY_OSL_PATH_3DSMAX2021: string;
 		VRAY_OSL_PATH_3DSMAX2022: string;
-		VRAY_OSL_PATH_MAYA2022: string;
 		VRAY_SEND_FEEDBACK: string;
-		VRAY_TOOLS_MAYA2022: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		VSCODE_GIT_IPC_HANDLE: string;
 		VSCODE_INJECTION: string;
 		windir: string;
+		_VOLTA_TOOL_RECURSION: string;
 		[key: `PUBLIC_${string}`]: undefined;
-		[key: string]: string | undefined;
+		[key: `${string}`]: string | undefined;
 	}
 }
 
